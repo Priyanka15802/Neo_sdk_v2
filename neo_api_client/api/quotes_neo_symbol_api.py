@@ -1,6 +1,8 @@
 import urllib.parse
 from json import JSONDecodeError
 
+from neo_api_client.urls import PROD_BASE_URL_GW_NAPI
+
 
 class QuotesAPI(object):
 
@@ -15,7 +17,10 @@ class QuotesAPI(object):
         neo_symbol_str = ",".join(f"{item['exchange_segment']}|{item['instrument_token']}" for item in instrument_tokens)
         encoded_neo_symbol_str = urllib.parse.quote(neo_symbol_str)
         header_params = {'Authorization': "Bearer " + self.api_client.configuration.bearer_token}
-        URL = self.api_client.configuration.get_url_details("quotes_neo_symbol")
+        if self.api_client.configuration.base_url == PROD_BASE_URL_GW_NAPI:
+            URL = self.api_client.configuration.get_url_details("quotes_neo_symbol_napi")
+        else:
+            URL = self.api_client.configuration.get_url_details("quotes_neo_symbol")
         URL = URL.format(neo_symbols=encoded_neo_symbol_str, quote_type=quote_type)
         quotes = self.rest_client.request(
             url=URL, method='GET',

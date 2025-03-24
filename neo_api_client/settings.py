@@ -67,6 +67,7 @@ PROD_URL = {
     "totp_validate_napi": "login/1.0/login/v6/totp/validate",
     "totp_de_register": "apim/login/2.0/login/v6/totp/deregister",
     "quotes_neo_symbol": "apim/quotes/2.0/quotes/neosymbol/{neo_symbols}/{quote_type}",
+    "quotes_neo_symbol_napi": "apim/quotes/1.0/quotes/neosymbol/{neo_symbols}/{quote_type}",
     "qr_code_get_link": "apim/login/2.0/algo-user/v5/login/authorization/dialog",
     "qr_code_generate_session": "apim/login/2.0/algo-user/v5/login/generate-session-token"
 }
