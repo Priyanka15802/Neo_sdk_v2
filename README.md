@@ -61,6 +61,7 @@ client = NeoAPI(consumer_key="", consumer_secret="", environment='prod', access_
 
 
 # Login using TOTP
+
 # Complete your TOTP registration from Kotak Securities website. Follow steps mentioned below.
 
 # Visit https://www.kotaksecurities.com/platform/kotak-neo-trade-api/ and select Register for Totp.
@@ -91,7 +92,7 @@ client.totp_login(mobile_number="", ucc="", totp='')
 client.totp_validate(mpin="")
 
 
-# QR Code Login
+# Alternate Login Method - Login using QR code (User can either login with TOTP or with QR flow)
 
 # ucc: Unique Client Code which you will find in mobile application/website under profile section
 # qr_code_get_link returns a qrcode
@@ -175,7 +176,7 @@ client.modify_order(order_id = "", price = "7.0", quantity = "2", disclosed_quan
 client.cancel_order(order_id = "")
 
 # order_id: Order number you'll recieve from the response after placing the order
-# isVerify: isVerify is an optional param. Default value is 'False'
+# isVerify: isVerify is an optional param. Default value is 'False'. If isVerify is True, we will first check the status of the given order. If the order status is not 'rejected', 'cancelled', 'traded', or 'completed', we will proceed to cancel the order using the cancel_order function. Otherwise, we will display the order status to the user instead.
 # amo: It specifies whether its an after market order. Expected values are YES and NO
 # This request will check whether your order is rejected, cancelled, complete or traded. If any of this is true, your order will not be cancelled. This will be rejected with the rejection reson. 
 # If this is not the case, the your order will be cancelled.
@@ -186,7 +187,7 @@ client.cancel_order(order_id = "", amo = "", isVerify=True)
 # order_id: Order number you'll recieve from the response after placing the order
 client.cancel_cover_order(order_id = "")
 # order_id: Order number you'll recieve from the response after placing the order
-# isVerify: isVerify is an optional param. Default value is 'False'.
+# isVerify: isVerify is an optional param. Default value is 'False'. If isVerify is True, we will first check the status of the given order. If the order status is not 'rejected', 'cancelled', 'traded', or 'completed', we will proceed to cancel the order using the cancel_order function. Otherwise, we will display the order status to the user instead.
 # This request will check whether your order is rejected, cancelled, complete or traded. If any of this is true, your order will not be cancelled. This will be rejected with the rejection reson. 
 # amo: It specifies whether its an after market order. Expected values are YES and NO
 client.cancel_cover_order(order_id = "", amo = "", isVerify=False)
@@ -196,7 +197,7 @@ client.cancel_cover_order(order_id = "", amo = "", isVerify=False)
 # order_id: Order number you'll recieve from the response after placing the order
 client.cancel_bracket_order(order_id = "")
 # order_id: Order number you'll recieve from the response after placing the order
-# isVerify: isVerify is an optional param. Default value is 'False'.
+# isVerify: isVerify is an optional param. Default value is 'False'. If isVerify is True, we will first check the status of the given order. If the order status is not 'rejected', 'cancelled', 'traded', or 'completed', we will proceed to cancel the order using the cancel_order function. Otherwise, we will display the order status to the user instead.
 # This request will check whether your order is rejected, cancelled, complete or traded. If any of this is true, your order will not be cancelled. This will be rejected with the rejection reson. 
 # amo: It specifies whether its an after market order. Expected values are YES and NO
 client.cancel_bracket_order(order_id = "", amo = "", isVerify=False)

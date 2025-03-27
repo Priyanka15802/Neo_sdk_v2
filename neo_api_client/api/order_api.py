@@ -141,7 +141,10 @@ class OrderAPI(object):
         body_params = {"on": order_id, "am": amo}
 
         query_params = {"sId": self.api_client.configuration.serverId}
-        URL = self.api_client.configuration.get_url_details("cancel_cover_order")
+        if self.api_client.configuration.base_url == PROD_BASE_URL_GW_NAPI:
+            URL = self.api_client.configuration.get_url_details("cancel_cover_order_napi")
+        else:
+            URL = self.api_client.configuration.get_url_details("cancel_cover_order")
         try:
             cancel_resp = self.rest_client.request(
                 url=URL, method='POST',
@@ -173,7 +176,10 @@ class OrderAPI(object):
         body_params = {"on": order_id, "am": amo}
 
         query_params = {"sId": self.api_client.configuration.serverId}
-        URL = self.api_client.configuration.get_url_details("cancel_bracket_order")
+        if self.api_client.configuration.base_url == PROD_BASE_URL_GW_NAPI:
+            URL = self.api_client.configuration.get_url_details("cancel_bracket_order_napi")
+        else:
+            URL = self.api_client.configuration.get_url_details("cancel_bracket_order")
         try:
             cancel_resp = self.rest_client.request(
                 url=URL, method='POST',
