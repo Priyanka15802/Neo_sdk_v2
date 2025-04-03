@@ -131,8 +131,8 @@ class NeoUtility:
             if self.neo_fin_key:
                 fin_key = self.neo_fin_key
             else:
-                fin_key = "X6Nk8cQhUgGmJ2vBdWw4sfzrz4L5En"
-                # fin_key = "neotradeapi"
+                # fin_key = "X6Nk8cQhUgGmJ2vBdWw4sfzrz4L5En"
+                fin_key = "neotradeapi"
         else:
             if self.neo_fin_key:
                 fin_key = self.neo_fin_key
