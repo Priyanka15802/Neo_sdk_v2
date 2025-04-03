@@ -4,6 +4,8 @@ from pickletools import uint1
 from requests import session
 from json import JSONDecodeError
 
+from neo_api_client.urls import PROD_BASE_URL_GW_NAPI
+
 
 class QrCodeAPI(object):
 
@@ -15,7 +17,10 @@ class QrCodeAPI(object):
 
     def qr_code_get_link(self, ucc=None):
         header_params = {'Authorization': "Bearer " + self.api_client.configuration.bearer_token}
-        URL = self.api_client.configuration.get_url_details("qr_code_get_link")
+        if self.api_client.configuration.base_url == PROD_BASE_URL_GW_NAPI:
+            URL = self.api_client.configuration.get_url_details("qr_code_get_link_napi")
+        else:
+            URL = self.api_client.configuration.get_url_details("qr_code_get_link")
         query_params = {'id': ucc}
         qr_code_link = self.rest_client.request(
             url=URL, method='GET',
@@ -32,8 +37,11 @@ class QrCodeAPI(object):
         return qr_code_link_data
 
     def qr_code_generate_session(self, ott=None, ucc=None):
-        header_params = {'Authorization': "Bearer " + self.api_client.configuration.bearer_token}
-        URL = self.api_client.configuration.get_url_details("qr_code_generate_session")
+        header_params = {'Authorization': "Bearer " + self.api_client.configuration.bearer_token, 'neo-fin-key': self.api_client.configuration.get_neo_fin_key()}
+        if self.api_client.configuration.base_url == PROD_BASE_URL_GW_NAPI:
+            URL = self.api_client.configuration.get_url_details("qr_code_generate_session_napi")
+        else:
+            URL = self.api_client.configuration.get_url_details("qr_code_generate_session")
         body_params = {
             "ott": ott,
             "id": ucc
