@@ -1,6 +1,7 @@
 import neo_api_client
 from neo_api_client import rest
 from neo_api_client.exceptions import ApiException
+from neo_api_client.settings import ORDER_SOURCE
 from neo_api_client.urls import PROD_BASE_URL_GW_NAPI
 
 
@@ -8,7 +9,7 @@ class OrderAPI(object):
     def __init__(self, api_client):
         self.api_client = api_client
         self.rest_client = api_client.rest_client
-        self.order_source = "FINTECH001"
+        self.order_source = ORDER_SOURCE
 
     def order_placing(
             self,

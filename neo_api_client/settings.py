@@ -206,3 +206,5 @@ help_functions = {
     15: 'help("subscribe_to_orderfeed")',
     16: 'help()'
 }
+
+ORDER_SOURCE = 'NEOFINTECH001'

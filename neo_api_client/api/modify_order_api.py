@@ -1,6 +1,7 @@
 import neo_api_client
 from neo_api_client import rest
 from neo_api_client.exceptions import ApiException
+from neo_api_client.settings import ORDER_SOURCE
 from neo_api_client.urls import PROD_BASE_URL_GW_NAPI
 
 
@@ -8,6 +9,7 @@ class ModifyOrder(object):
     def __init__(self, api_client):
         self.api_client = api_client
         self.rest_client = api_client.rest_client
+        self.order_source = ORDER_SOURCE
 
     def quick_modification(self, order_id, price, order_type, quantity, validity, instrument_token,
                            exchange_segment, product, trading_symbol, transaction_type, trigger_price,
@@ -21,7 +23,8 @@ class ModifyOrder(object):
         body_params = {"tk": instrument_token, "mp": market_protection, "pc": product, "dd": dd,
                        "dq": disclosed_quantity, "vd": validity, "ts": trading_symbol, "tt": transaction_type,
                        "pr": price, "pt": order_type, "fq": filled_quantity, 'am': amo,
-                       "tp": trigger_price, "qt": quantity, "no": order_id, "es": exchange_segment}
+                       "tp": trigger_price, "qt": quantity, "no": order_id, "es": exchange_segment,
+                       "os": self.order_source,}
 
         query_params = {"sId": self.api_client.configuration.serverId}
         try:
@@ -89,7 +92,8 @@ class ModifyOrder(object):
                             "qt": quantity,
                             "no": order_id,
                             "es": exchange_segment,
-                            "am": amo
+                            "am": amo,
+                            "os": self.order_source,
                         }
                         query_params = {"sId": self.api_client.configuration.serverId}
                         try:
